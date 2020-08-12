@@ -20,19 +20,15 @@ const clickReinicio = () => {
 
 
 const App = () => {
-  const [tempo, settempo] = useState('0.16.7');
   const [data , setdata ] = useState(new Date());
   
   const clickPeca =() =>{
     console.warn("oi quanto tem po passou " + data.getSeconds() )
-    let dataAtual = new Date().getSeconds()
-    console.log("oi quanto tem po passou " + data.getSeconds() - dataAtual );
   }
 
   return (
     <Fragment>
-      <Text style={styles.tempo}>{tempo}</Text>
-      <Cronometro/>
+      <Cronometro acao={"iniciar"} />
       <View style={{alignContent: 'center'}}  >
 
 {/*
@@ -49,15 +45,12 @@ const App = () => {
             }
           />
         </View>*/}
-          <Text>{new Date() - data  } </Text>
 
             <TouchableOpacity onPress={() => settempo('0.00.0')}  >
               <Text style={styles.reiniciar}>Reiniciar </Text>
             </TouchableOpacity>
 
       </View>
-
-
     </Fragment>
   );
 };
@@ -93,13 +86,6 @@ const styles = StyleSheet.create({
     height : 35,
     borderRadius: 10, 
     marginLeft: 90 
-  }, 
-  tempo:{
-    fontSize: 60, 
-    textAlign: 'center',
-    marginTop: 30, 
-    marginBottom: 30
-    , color: '#0b67cd' 
   }
 });
 
