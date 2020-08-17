@@ -1,5 +1,5 @@
 
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import {  StyleSheet,
   Text,
   TouchableOpacity, View, Dimensions, FlatList
@@ -14,21 +14,23 @@ const numeros = [
   {id: 12, valor: 1 },{id: 13, valor: 1 },{id: 14, valor: 1 },{id: 15, valor: 1 }
 ];
 
-const clickReinicio = () => {
-  console.log("clicou");
-}
-
 
 const App = () => {
-  const [data , setdata ] = useState(new Date());
+  const [acao , setacao ] = useState("iniciar");
   
   const clickPeca =() =>{
-    console.warn("oi quanto tem po passou " + data.getSeconds() )
+    console.log("olaha a acao ai  " + acao);
+    setacao("iniciar");
   }
+
+  useEffect(() => {
+    console.log("changed acao ", acao);
+  }, [acao]);
 
   return (
     <Fragment>
-      <Cronometro acao={"iniciar"} />
+      <Cronometro acao={acao} setAcao={setacao}/>
+      {console.log("eita ", acao )}
       <View style={{alignContent: 'center'}}  >
 
 {/*
@@ -46,7 +48,7 @@ const App = () => {
           />
         </View>*/}
 
-            <TouchableOpacity onPress={() => settempo('0.00.0')}  >
+            <TouchableOpacity onPress={() => clickPeca()}  >
               <Text style={styles.reiniciar}>Reiniciar </Text>
             </TouchableOpacity>
 
