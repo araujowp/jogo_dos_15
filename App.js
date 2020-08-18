@@ -14,23 +14,22 @@ const numeros = [
   {id: 12, valor: 1 },{id: 13, valor: 1 },{id: 14, valor: 1 },{id: 15, valor: 1 }
 ];
 
-
 const App = () => {
   const [acao , setacao ] = useState("iniciar");
   
   const clickPeca =() =>{
-    console.log("olaha a acao ai  " + acao);
     setacao("iniciar");
+    console.log(" ------------ -- Iniciar -- ------------ " + acao);
   }
 
-  useEffect(() => {
-    console.log("changed acao ", acao);
-  }, [acao]);
+  const clickParar =() =>{
+    console.log(" ------------ -- Parar -- ------------ " + acao);
+    setacao("parar");
+  }
 
   return (
     <Fragment>
       <Cronometro acao={acao} setAcao={setacao}/>
-      {console.log("eita ", acao )}
       <View style={{alignContent: 'center'}}  >
 
 {/*
@@ -50,6 +49,10 @@ const App = () => {
 
             <TouchableOpacity onPress={() => clickPeca()}  >
               <Text style={styles.reiniciar}>Reiniciar </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => clickParar()}  >
+              <Text style={styles.reiniciar}>Parar </Text>
             </TouchableOpacity>
 
       </View>

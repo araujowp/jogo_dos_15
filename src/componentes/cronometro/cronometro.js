@@ -4,37 +4,38 @@ import estilo from './estilo';
 
 const Cronometro  = ({acao, setAcao}) =>{
     
-    const [currentAcao, setCurrentAcao] = useState(acao);
-    // let acao1 = acao;
+    let incremento = 1
+    const [decimos, setdecimos] = useState(0); 
     const [ tempo , settempo ] = useState(3);
 
     useEffect(() => {        
         const intervalo  = setInterval(() => {
-            
-           console.log(" acao da properts " , acao);
-           console.log(" acao da currentAcao " , currentAcao);
-            if (currentAcao == "iniciar"){
-                console.log("iniciando " )
-                settempo(0);
-                // console.log("Tempo atualizado");
-                setCurrentAcao("continuar");
-            } else {
-                console.log("else : " ,acao);
-                settempo(tempo +1);
-                setCurrentAcao("outra ");
-                //console.log("incrementando " )
-            }
-            
+            settempo(tempo + 1);
+        },2000);
 
-
-        },1500);
+        if (acao == "iniciar"){
+            incremento = 1
+            settempo(0);
+            setdecimos(0);
+            console.log("decimos",decimos, "tempo:", tempo)
+            clearInterval(intervalo);
+            setAcao("continuar");
+        } else 
+        if (acao == "parar"){
+            incremento = 0
+            console.log("else : " ,acao);
+        }
+        setdecimos(decimos +  incremento)
+        
+        console.log(" incremento: " , incremento, " decimos: ", decimos, " acao: " , acao, " tempo:" , tempo);
+        
         return () => clearInterval(intervalo);
     },[tempo])
 
 
     return(
         <View> 
-            <Text style={estilo.tempo} >{tempo + " " + acao}</Text>
+            <Text style={estilo.tempo} >{decimos + " " + acao}</Text>
         </View>
     );
 }
